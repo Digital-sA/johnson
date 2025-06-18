@@ -3,44 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@InfluencerName | Links</title>
+    <title>LinkHub | Your Business, One Link</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --dark: #1e293b;
-            --light: #f8fafc;
+            --primary: #4f46e5;
+            --primary-hover: #6366f1;
+            --text: #1e293b;
+            --bg: #ffffff;
+            --card-bg: #f8fafc;
+            --border: #e2e8f0;
             --gray: #94a3b8;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-        
+
+        .dark-mode {
+            --primary: #818cf8;
+            --primary-hover: #a5b4fc;
+            --text: #f8fafc;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --gray: #94a3b8;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            transition: background-color 0.3s, color 0.2s;
         }
-        
+
         body {
-            background-color: var(--light);
-            color: var(--dark);
+            background-color: var(--bg);
+            color: var(--text);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 2rem;
-            background-image: radial-gradient(circle at 10% 20%, rgba(248, 250, 252, 0.9) 0%, rgba(248, 250, 252, 1) 90%);
+            line-height: 1.5;
         }
-        
+
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
         }
-        
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(90deg, var(--primary), #a855f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
         /* Profile Section */
         .profile {
             display: flex;
@@ -50,197 +90,237 @@
             text-align: center;
             animation: fadeIn 0.8s ease-out;
         }
-        
+
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid white;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            border: 3px solid var(--primary);
+            box-shadow: var(--shadow);
         }
-        
-        .avatar:hover {
-            transform: scale(1.05);
-        }
-        
+
         .name {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            color: var(--dark);
         }
-        
+
         .bio {
             color: var(--gray);
-            font-size: 1rem;
             max-width: 80%;
-            line-height: 1.5;
         }
-        
-        /* Links Section */
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        /* Links */
         .links {
             width: 100%;
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            animation: slideUp 0.6s ease-out 0.2s both;
         }
-        
+
         .link {
-            background: white;
-            color: var(--dark);
+            background: var(--card-bg);
+            color: var(--text);
             text-decoration: none;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
+            padding: 1rem;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            transform: translateY(0);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
         }
-        
-        .link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+        .link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
             background: var(--primary);
-            color: white;
-        }
-        
-        .link:hover .link-icon {
-            transform: scale(1.1);
-        }
-        
-        .link-icon {
-            font-size: 1.5rem;
+            transform: scaleY(0);
+            transform-origin: bottom;
             transition: transform 0.3s ease;
         }
-        
+
+        .link:hover::before {
+            transform: scaleY(1);
+        }
+
+        .link:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-icon {
+            font-size: 1.2rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(79, 70, 229, 0.1);
+            border-radius: 8px;
+            color: var(--primary);
+        }
+
         .link-text {
             flex: 1;
             font-weight: 500;
         }
-        
+
         .link-arrow {
-            opacity: 0;
-            transform: translateX(-5px);
+            color: var(--gray);
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(90deg, var(--primary), #a855f7);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
             transition: all 0.3s ease;
-        }
-        
-        .link:hover .link-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        /* Social Icons */
-        .socials {
             display: flex;
-            gap: 1.5rem;
-            margin-top: 0.5rem;
-            animation: fadeIn 0.8s ease-out 0.4s both;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .social-icon {
-            color: var(--gray);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.4);
         }
-        
-        .social-icon:hover {
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        /* Footer */
-        footer {
-            margin-top: 2rem;
-            color: var(--gray);
-            font-size: 0.875rem;
-            text-align: center;
-            animation: fadeIn 0.8s ease-out 0.6s both;
-        }
-        
+
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        
-        @keyframes slideUp {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+
         /* Responsive */
-        @media (max-width: 480px) {
-            body {
-                padding: 1.5rem;
-            }
-            
-            .bio {
-                max-width: 100%;
+        @media (max-width: 500px) {
+            .stats {
+                gap: 1rem;
+                padding: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <header class="header">
+            <div class="logo">LinkHub</div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
         <section class="profile">
-            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Profile" class="avatar">
-            <h1 class="name">Alex Johnson</h1>
-            <p class="bio">Digital creator | Photography enthusiast | Sharing my journey one post at a time</p>
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Profile" class="avatar">
+            <h1 class="name">Business Name</h1>
+            <p class="bio">One link for all your business connections</p>
         </section>
-        
-        <div class="socials">
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value">10K+</div>
+                <div class="stat-label">Visitors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">95%</div>
+                <div class="stat-label">Engagement</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Active</div>
+            </div>
         </div>
-        
+
         <section class="links">
             <a href="#" class="link">
-                <div class="link-icon"><i class="fab fa-youtube"></i></div>
-                <div class="link-text">Watch my latest video</div>
+                <div class="link-icon"><i class="fas fa-globe"></i></div>
+                <div class="link-text">Our Website</div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            
             <a href="#" class="link">
                 <div class="link-icon"><i class="fas fa-store"></i></div>
-                <div class="link-text">Shop my merch</div>
+                <div class="link-text">Online Store</div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            
+            <a href="#" class="link">
+                <div class="link-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="link-text">Book Appointment</div>
+                <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
+            </a>
             <a href="#" class="link">
                 <div class="link-icon"><i class="fas fa-envelope"></i></div>
-                <div class="link-text">Contact me</div>
+                <div class="link-text">Contact Us</div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
-            
             <a href="#" class="link">
-                <div class="link-icon"><i class="fas fa-book"></i></div>
-                <div class="link-text">Read my blog</div>
-                <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
-            </a>
-            
-            <a href="#" class="link">
-                <div class="link-icon"><i class="fas fa-podcast"></i></div>
-                <div class="link-text">Listen to my podcast</div>
+                <div class="link-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="link-text">Portfolio</div>
                 <div class="link-arrow"><i class="fas fa-chevron-right"></i></div>
             </a>
         </section>
-        
-        <footer>
-            © 2023 Alex Johnson. All rights reserved.
-        </footer>
+
+        <button class="cta">
+            <i class="fas fa-rocket"></i> Get Started
+        </button>
     </div>
+
+    <script>
+        // Dark/Light Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            
+            if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // Check for user's preferred color scheme
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+    </script>
 </body>
 </html>
